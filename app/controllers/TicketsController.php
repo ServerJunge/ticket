@@ -7,23 +7,25 @@ class TicketsController extends BaseController
     public function index()
     {
         // Show a listing of tickets.
-        $tickets = Ticket::all();
+        $tickets = Ticket::with('user')->get();
+        // Count the number of tickets
+        $counter = count($tickets);
 
-        return View::make('index', compact('tickets'));
+        return View::make('tickets/index', compact('tickets', 'counter'));
     }
 
     public function create()
     {
         // Show the create ticket form.
-        return View::make('create');
+        return View::make('tickets/create');
     }
 
     public function handleCreate()
     {
         // Handle create form submission.
         $ticket = new Ticket;
-        $ticket->title        = Input::get('title');
-        $ticket->description   = Input::get('description');
+        $ticket->title = Input::get('title');
+        $ticket->description = Input::get('description');
         $ticket->save();
 
         return Redirect::action('TicketsController@index');
@@ -32,15 +34,15 @@ class TicketsController extends BaseController
     public function edit(Ticket $ticket)
     {
         // Show the edit ticket form.
-        return View::make('edit', compact('ticket'));
+        return View::make('tickets/edit', compact('ticket'));
     }
 
     public function handleEdit()
     {
         // Handle edit form submission.
         $ticket = Ticket::findOrFail(Input::get('id'));
-        $ticket->title        = Input::get('title');
-        $ticket->description   = Input::get('description');
+        $ticket->title = Input::get('title');
+        $ticket->description = Input::get('description');
         $ticket->save();
 
         return Redirect::action('TicketsController@index');
@@ -49,7 +51,7 @@ class TicketsController extends BaseController
     public function delete(Ticket $ticket)
     {
         // Show delete confirmation page.
-        return View::make('delete', compact('ticket'));
+        return View::make('tickets/delete', compact('ticket'));
     }
 
     public function handleDelete()

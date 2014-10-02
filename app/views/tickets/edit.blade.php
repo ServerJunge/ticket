@@ -14,9 +14,9 @@
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" name="publisher" value="{{ $ticket->description }}" />
+            <input type="text" class="form-control" name="description" value="{{ $ticket->description }}" />
         </div>
         <input type="submit" value="Save" class="btn btn-primary" />
-        <a href="{{ action('TicketsController@index') }}" class="btn btn-link">Cancel</a>
+        <a href="{{ action('TicketsController@index') }}" class="btn btn-danger">Cancel</a>
     </form>
 @stop

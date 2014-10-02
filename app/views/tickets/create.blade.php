@@ -15,6 +15,6 @@
             <input type="text" class="form-control" name="description" />
         </div>
         <input type="submit" value="Create" class="btn btn-primary" />
-        <a href="{{ action('TicketsController@index') }}" class="btn btn-link">Cancel</a>
+        <a href="{{ action('TicketsController@index') }}" class="btn btn-danger">Cancel</a>
     </form>
 @stop
