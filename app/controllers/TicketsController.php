@@ -16,16 +16,22 @@ class TicketsController extends BaseController
 
     public function create()
     {
+        // Create Dropdown-List with Users.
+        $users = User::lists('username', 'id');
         // Show the create ticket form.
-        return View::make('tickets/create');
+        return View::make('tickets/create', compact('users'));
     }
 
     public function handleCreate()
     {
         // Handle create form submission.
+        $user = Input::get('username');
+
+
         $ticket = new Ticket;
         $ticket->title = Input::get('title');
         $ticket->description = Input::get('description');
+        $ticket->user()->associate($user);
         $ticket->save();
 
         return Redirect::action('TicketsController@index');

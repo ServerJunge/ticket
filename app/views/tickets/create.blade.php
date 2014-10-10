@@ -16,5 +16,6 @@
         </div>
         <input type="submit" value="Create" class="btn btn-primary" />
         <a href="{{ action('TicketsController@index') }}" class="btn btn-danger">Cancel</a>
+        {{ Form::select('username', $users) }}
     </form>
 @stop
